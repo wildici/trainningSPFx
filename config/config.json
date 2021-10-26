@@ -9,10 +9,19 @@
           "manifest": "./src/webparts/helloWorld/HelloWorldWebPart.manifest.json"
         }
       ]
+    },
+    "add-list-item-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/addListItem/AddListItemWebPart.js",
+          "manifest": "./src/webparts/addListItem/AddListItemWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
   "localizedResources": {
-    "HelloWorldWebPartStrings": "lib/webparts/helloWorld/loc/{locale}.js"
+    "HelloWorldWebPartStrings": "lib/webparts/helloWorld/loc/{locale}.js",
+    "AddListItemWebPartStrings": "lib/webparts/addListItem/loc/{locale}.js"
   }
 }
