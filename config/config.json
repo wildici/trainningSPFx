@@ -17,11 +17,20 @@
           "manifest": "./src/webparts/addListItem/AddListItemWebPart.manifest.json"
         }
       ]
+    },
+    "show-list-items-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/showListItems/ShowListItemsWebPart.js",
+          "manifest": "./src/webparts/showListItems/ShowListItemsWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
   "localizedResources": {
     "HelloWorldWebPartStrings": "lib/webparts/helloWorld/loc/{locale}.js",
-    "AddListItemWebPartStrings": "lib/webparts/addListItem/loc/{locale}.js"
+    "AddListItemWebPartStrings": "lib/webparts/addListItem/loc/{locale}.js",
+    "ShowListItemsWebPartStrings": "lib/webparts/showListItems/loc/{locale}.js"
   }
 }
