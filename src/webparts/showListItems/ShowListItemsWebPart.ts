@@ -10,18 +10,33 @@ import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import * as strings from 'ShowListItemsWebPartStrings';
 import ShowListItems from './components/ShowListItems';
 import { IShowListItemsProps } from './components/IShowListItemsProps';
+import { setup as pnpSetup } from "@pnp/common";
+
 
 export interface IShowListItemsWebPartProps {
   description: string;
+  listName: string;
 }
 
-export default class ShowListItemsWebPart extends BaseClientSideWebPart<IShowListItemsWebPartProps> {
+export default class ShowListItemsWebPart extends BaseClientSideWebPart<IShowListItemsWebPartProps > {
+
+// ...
+protected onInit(): Promise<void> {
+  return super.onInit().then(_ => {
+    // other init code may be present
+    pnpSetup({
+      spfxContext: this.context
+    });
+  });
+}
+// ...
 
   public render(): void {
     const element: React.ReactElement<IShowListItemsProps> = React.createElement(
       ShowListItems,
       {
-        description: this.properties.description
+        description: this.properties.description,
+        listName: this.properties.listName
       }
     );
 
@@ -49,6 +64,9 @@ export default class ShowListItemsWebPart extends BaseClientSideWebPart<IShowLis
               groupFields: [
                 PropertyPaneTextField('description', {
                   label: strings.DescriptionFieldLabel
+                }),
+                PropertyPaneTextField('listName', {
+                  label: 'Nome da lista'
                 })
               ]
             }

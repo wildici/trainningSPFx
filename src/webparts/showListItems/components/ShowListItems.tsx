@@ -1,34 +1,53 @@
-import * as React from 'react';
-import styles from './ShowListItems.module.scss';
-import { IShowListItemsProps } from './IShowListItemsProps';
-import { escape } from '@microsoft/sp-lodash-subset';
-import Form from './Form';
+import * as React from 'react'
+import { IShowListItemsProps } from './IShowListItemsProps'
+import { escape } from '@microsoft/sp-lodash-subset'
+import Form from './Form'
+import Table from './Table'
 
-// export default class ShowListItems extends React.Component<IShowListItemsProps, {}> {
-//   public render(): React.ReactElement<IShowListItemsProps> {
-//     return (
-//       <div className={ styles.showListItems }>
-//         <div className={ styles.container }>
-//           <div className={ styles.row }>
-//             <div className={ styles.column }>
-//               <span className={ styles.title }>Welcome to SharePoint!</span>
-//               <p className={ styles.subTitle }>Customize SharePoint experiences using Web Parts.</p>
-//               <p className={ styles.description }>{escape(this.props.description)}</p>
-//               <a href="https://aka.ms/spfx" className={ styles.button }>
-//                 <span className={ styles.label }>Learn more</span>
-//               </a>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     );
-//   }
-// }
+import { sp } from "@pnp/sp"
+import "@pnp/sp/webs"
+import "@pnp/sp/lists"
+import "@pnp/sp/items"
 
-function ShowListItems() {
-  return (
-    <Form />
-  )
+export interface getListItems{
+  Items: any
 }
 
-export default ShowListItems
+export default class ShowListItems extends React.Component<IShowListItemsProps, getListItems, {}> {
+  
+  constructor(props) {
+    super(props)
+    this.state = {
+      Items: []
+    }
+  }
+
+  async componentDidMount() {
+    // const items: any[] = await sp.web.lists.getByTitle(this.props.listName).items.get()
+    const items: any[] = await sp.web.lists.getByTitle("Pessoas").items.get()
+    this.setState({
+      Items: items
+    })
+  }
+
+  renderHtml(value) {
+    return (
+      <tr>
+        <td>{value.Title}</td>
+        <td>{value.Sobrenome}</td>
+        <td>{value.Email}</td>
+        <td>{value.Genero}</td>
+      </tr>
+    )
+  }
+
+  public render(): React.ReactElement<IShowListItemsProps> {
+
+    return (
+      <div>
+          <Table data={this.state.Items.map(this.renderHtml)} />
+      </div>
+    )
+  }
+
+}
