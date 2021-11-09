@@ -1,0 +1,16 @@
+.btnsAction svg {
+    font-size: 1.5em;
+}
+
+.btnEdit {
+    color: green;
+}
+
+.btnDelete {
+    color: red;
+}
+
+.btnEdit,
+.btnDelete {
+    cursor: pointer;
+}
