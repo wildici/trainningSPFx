@@ -53,7 +53,7 @@ export default class ShowListItems extends React.Component<IShowListItemsProps, 
         <td>{value.Email}</td>
         <td>{value.Genero}</td>
         <td className="btnsAction">
-          <a onClick={ this.itemDelete(value.Id)} title={value.Id}>
+          <a href="">
             <FaEdit className="btnEdit" />
           </a>
           &nbsp;
